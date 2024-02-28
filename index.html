@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concatenar nome e calcular idade</title>
+
+    <style>
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #nome, #sobrenome {
+            width: 20rem;
+            height: 2rem;
+        }
+
+        #ano-nascimento {
+            width: 8rem;
+            height: 2rem;
+        }
+
+        input {
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #button {
+            width: 15rem;
+            height: 3rem;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(8, 124, 233);
+            color: white;
+        }
+
+        #button:hover {
+            scale: 102%;
+            background-color: rgb(18, 18, 179);
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+    
+    <main>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome">
+        
+        <label for="sobrenome">Sobrenome</label>
+        <input type="text" id="sobrenome">
+        <label for="ano-nascimento">Ano de Nascimento</label>
+        <input type="number" id="ano-nascimento">
+        <input id="button" type="button" value="Juntar nome e calcular idade" onclick="exibirResultado();">
+        <dialog id="resultado"></dialog>
+    </main>
+
+    <script>
+
+        function exibirResultado() {
+    
+            let nomeCompleto = juntarNome();
+            let idade = calcularIdade();
+    
+            let resultado = document.getElementById("resultado");
+            
+            let pNomeCompleto = document.createElement("p");
+            pNomeCompleto.innerHTML = "Nome Completo: " + nomeCompleto;
+    
+            let pIdade = document.createElement("p");
+            pIdade.innerHTML = "Idade: " + idade + " (" + calcularMaturidade(idade) + ")";
+
+    
+            resultado.appendChild(pNomeCompleto);
+            resultado.appendChild(pIdade);
+
+            resultado.showModal()
+    
+        }
+
+        function calcularMaturidade(idade) {
+
+            if (idade < 20) {
+                return "Novinho(a)";
+            } else if (idade >= 20 && idade <= 40) {
+                return "Maduro(a)";
+            } else if (idade > 40) {
+                return "Velho";
+            }
+
+        }
+    
+        function juntarNome() {
+    
+            let nome = document.getElementById("nome").value;
+            let sobrenome = document.getElementById("sobrenome").value;
+    
+            return nome + " " + sobrenome;
+    
+        }
+    
+        function calcularIdade() {
+    
+            let anoNascimento = document.getElementById("ano-nascimento").value;
+            let anoAtual = new Date().getFullYear();
+            
+            return anoAtual - anoNascimento;
+    
+        }
+    
+    
+    </script>
+</body>
+</html>
